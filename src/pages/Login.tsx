@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
-import api from '../api/axios'
+import api from '../api/axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,10 +11,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await axios.post(
-        'https://mentorship-backend-kgfs.onrender.com/auth/login',
-        { email, password }
-      );
+      const response = await api.post('/auth/login',{ email, password });
 
       const { token, user } = response.data;
       localStorage.setItem('token', token);

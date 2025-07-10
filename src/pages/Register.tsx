@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -26,7 +26,7 @@ const Register = () => {
     setSuccess('');
 
     try {
-      const response = await axios.post('https://mentorship-backend-kgfs.onrender.com/auth/register', {
+        await api.post('/auth/register', {
         ...form,
         skills: form.skills.split(',').map(skill => skill.trim())
       });
