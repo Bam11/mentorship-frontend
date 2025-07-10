@@ -52,7 +52,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen bg-white text-gray-800 px-4">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
 
@@ -60,49 +60,49 @@ const Register = () => {
         {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
 
         <div className="mb-4">
-          <label className="block mb-1">Full Name</label>
+          <label className="block mb-1 text-gray-700">Full Name</label>
           <input
             type="text"
             name="name"
             value={form.name}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-800"
           />
         </div>
 
         <div className="mb-4">
-          <label className="block mb-1">Email</label>
+          <label className="block mb-1 text-gray-700">Email</label>
           <input
             type="email"
             name="email"
             value={form.email}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-800"
           />
         </div>
 
         <div className="mb-4">
-          <label className="block mb-1">Password</label>
+          <label className="block mb-1 text-gray-700">Password</label>
           <input
             type="password"
             name="password"
             value={form.password}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-800"
           />
         </div>
 
         <div className="mb-4">
-          <label className="block mb-1">Role</label>
+          <label className="block mb-1 text-gray-700">Role</label>
           <select
             name="role"
             value={form.role}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-800"
           >
             <option value="MENTEE">Mentee</option>
             <option value="MENTOR">Mentor</option>
@@ -110,46 +110,46 @@ const Register = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block mb-1">Bio</label>
+          <label className="block mb-1 text-gray-700">Bio</label>
           <textarea
             name="bio"
             value={form.bio}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-800"
           />
         </div>
 
         <div className="mb-4">
-          <label className="block mb-1">Skills (comma separated)</label>
+          <label className="block mb-1 text-gray-700">Skills (comma separated)</label>
           <input
             type="text"
             name="skills"
             value={form.skills}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-800"
             placeholder="e.g. JavaScript, UI/UX, Python"
           />
         </div>
 
         <div className="mb-4">
-          <label className="block mb-1">Goals</label>
+          <label className="block mb-1 text-gray-700">Goals</label>
           <input
             type="text"
             name="goals"
             value={form.goals}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-800"
           />
         </div>
 
         <div className="mb-6">
-          <label className="block mb-1">Industry</label>
+          <label className="block mb-1 text-gray-700">Industry</label>
           <input
             type="text"
             name="industry"
             value={form.industry}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-800"
           />
         </div>
 
@@ -157,7 +157,7 @@ const Register = () => {
           Register
         </button>
 
-        <p className="text-center text-sm mt-4">
+        <p className="text-center text-sm mt-4 text-gray-700">
           Already have an account? <a href="/" className="text-blue-500">Login</a>
         </p>
       </form>

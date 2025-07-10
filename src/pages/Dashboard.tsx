@@ -22,13 +22,15 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-white text-gray-800 px-4">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md text-center">
         <h1 className="text-2xl font-bold mb-4">Welcome to the Dashboard</h1>
         {user && (
           <>
             <p className="text-lg mb-2">Hello, <span className="font-semibold">{user.name}</span></p>
-            <p className="text-sm mb-4">Role: <span className="uppercase text-blue-600">{user.role}</span></p>
+            <p className="text-sm mb-4">
+              Role: <span className="uppercase text-blue-600">{user.role}</span>
+            </p>
           </>
         )}
         <button
@@ -39,6 +41,7 @@ const Dashboard = () => {
         </button>
       </div>
     </div>
+
   );
 };
 
