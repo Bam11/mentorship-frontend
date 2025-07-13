@@ -3,45 +3,37 @@ import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<{ name: string; role: string } | null>(null);
+  const [user, setUser] = useState<{ name: string; email: string; role: string } | null>(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (!storedUser) {
       navigate('/');
-      return;
+    } else {
+      setUser(JSON.parse(storedUser));
     }
-
-    setUser(JSON.parse(storedUser));
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/');
-  };
+  if (!user) return null;
 
   return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-white text-gray-800 px-4">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md text-center">
-        <h1 className="text-2xl font-bold mb-4">Welcome to the Dashboard</h1>
-        {user && (
-          <>
-            <p className="text-lg mb-2">Hello, <span className="font-semibold">{user.name}</span></p>
-            <p className="text-sm mb-4">
-              Role: <span className="uppercase text-blue-600">{user.role}</span>
-            </p>
-          </>
-        )}
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 px-4">
+      <div className="bg-white p-8 rounded shadow-lg max-w-md w-full text-center text-gray-800">
+        <h2 className="text-2xl font-bold mb-4">Welcome, {user.name}!</h2>
+        <p className="mb-2"><strong>Role:</strong> <span className="uppercase text-blue-600">{user.role}</span></p>
+        <p className="mb-6"><strong>Email:</strong> {user.email}</p>
+
         <button
-          onClick={handleLogout}
-          className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+          onClick={() => {
+            localStorage.clear();
+            navigate('/');
+          }}
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
         >
           Logout
         </button>
       </div>
     </div>
-
   );
 };
 
