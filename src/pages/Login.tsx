@@ -5,12 +5,14 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setloading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
     try {
+      setloading(true);
       const response = await api.post( '/auth/login',{ email, password });
 
       const { token, user } = response.data;
@@ -21,8 +23,11 @@ const Login = () => {
       if (user.role === 'ADMIN') window.location.href = '/admin/users';
       else if (user.role === 'MENTOR') window.location.href = '/dashboard';
       else window.location.href = '/dashboard';
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Login failed');
+    } catch (err: unknown) {
+      const error = err as {response?: {data?: {message?: string}}};
+      setError(error.response?.data?.message || 'Login failed');
+    } finally{
+      setloading(false);
     }
   };
 
@@ -60,9 +65,9 @@ const Login = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600" disabled={loading}
         >
-          Login
+          {loading ? "Processing" : "Registered"} Login
         </button>
 
         <p className="text-center text-sm mt-4 text-gray-700">

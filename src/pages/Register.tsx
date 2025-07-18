@@ -12,6 +12,8 @@ const Register = () => {
     goals: '',
     industry: ''
   });
+  
+  const [loading, setloading] = useState(false);
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -26,6 +28,7 @@ const Register = () => {
     setSuccess('');
 
     try {
+      setloading(true);
         await api.post('/auth/register', {
         ...form,
         skills: form.skills.split(',').map(skill => skill.trim())
@@ -49,6 +52,8 @@ const Register = () => {
     } catch (err: unknown) {
       const error = err as {response?: {data?: {message?: string}}};
       setError(error.response?.data?.message || 'Registration failed');
+    }finally{
+      setloading(false);
     }
   };
 
@@ -154,8 +159,8 @@ const Register = () => {
           />
         </div>
 
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-          Register
+        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700" disabled={loading}>
+          {loading ? "Processing" : "Registered"} Register
         </button>
 
         <p className="text-center text-sm mt-4 text-gray-700">

@@ -4,6 +4,9 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from './Components/ProtectedRoute';
+import AdminMatches from './pages/admin/Matches';
+import AdminSessions from './pages/admin/Sessions';
+import AssignMatch from './pages/admin/AssignMatch';
 
 // Admin Pages
 import AdminUsers from './pages/admin/Users'; // create later
@@ -21,6 +24,33 @@ function App() {
         element={
           <ProtectedRoute allowedRoles={['ADMIN']}>
             <AdminUsers />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/matches"
+        element={
+          <ProtectedRoute allowedRoles={['ADMIN']}>
+            <AdminMatches />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/sessions"
+        element={
+          <ProtectedRoute allowedRoles={['ADMIN']}>
+            <AdminSessions />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/assign"
+        element={
+          <ProtectedRoute allowedRoles={['ADMIN']}>
+            <AssignMatch />
           </ProtectedRoute>
         }
       />
