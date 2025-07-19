@@ -33,7 +33,7 @@ function App() {
         <Route path="users" element={<AdminUsers />} /> {/* /admin/users */}
         <Route path="matches" element={<AdminMatches />} />
         <Route path="sessions" element={<AdminSessions />} />
-        <Route path="assign" element={<AssignMatch />} />
+        <Route path="assign-match" element={<AssignMatch />} />
       </Route>
 
         

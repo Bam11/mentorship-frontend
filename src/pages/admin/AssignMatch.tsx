@@ -24,7 +24,7 @@ const AssignMatch = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const usersRes = await api.get('/admin/users');
+        const usersRes = await api.get('/auth/admin/users');
         const allUsers: User[] = usersRes.data.users;
 
         const mentorsList = allUsers.filter((u) => u.role === 'MENTOR');
@@ -46,7 +46,7 @@ const AssignMatch = () => {
     setSuccess('');
 
     try {
-      await api.post('/admin/assign-match', { mentorId, menteeId, topic });
+      await api.post('/auth/admin/assign-match', { mentorId, menteeId, topic });
       setSuccess('Mentor assigned successfully!');
       setMentorId('');
       setMenteeId('');
@@ -122,7 +122,7 @@ const AssignMatch = () => {
 
         <div className="text-center mt-4">
           <button
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/admin')}
             className="text-blue-500 hover:underline"
           >
             Back to Dashboard

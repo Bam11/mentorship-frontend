@@ -15,7 +15,7 @@ const Sessions = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await api.get('/admin/session-stats');
+        const res = await api.get('/auth/admin/session-stats');
         setStats(res.data);
       } catch (err: unknown) {
         const error = err as { response?: { data?: { message?: string } } };
@@ -54,7 +54,7 @@ const Sessions = () => {
 
         <div className="mt-6 text-center">
           <button
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/admin')}
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           >
             Back to Dashboard

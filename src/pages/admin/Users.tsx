@@ -22,13 +22,26 @@ const AdminUsers = () => {
     }
   };
 
-  const handleRoleChange = async (userId: string, newRole: string) => {
+  // Track role changes for each user
+  const [selectedRoles, setSelectedRoles] = useState<{ [key: string]: string }>({});
+
+  // Handle dropdown changes
+  const handleSelectChange = (userId: string, role: string) => {
+    setSelectedRoles((prev) => ({ ...prev, [userId]: role }));
+  };
+
+    // Confirm and update role
+  const handleUpdateRole = async (userId: string) => {
+    const newRole = selectedRoles[userId];
+    const confirmUpdate = window.confirm(`Are you sure you want to change this user's role to ${newRole}?`);
+    if (!confirmUpdate) return;
+
     try {
-      await api.put(`/auth/users/${userId}/role`, { role: newRole });
-      fetchUsers(); // refresh the list
+      await api.put(`/auth/admin/users/${userId}/role`, { role: newRole });
+      fetchUsers(); // Refresh list
     } catch (err: unknown) {
-      const error = err as {response?: {data?: {message?: string}}};
-      setError(error.response?.data?.message || 'Failed to load users');
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to update role');
     }
   };
 
@@ -68,15 +81,23 @@ const AdminUsers = () => {
                 <td className="py-2 px-4">{user.name}</td>
                 <td className="py-2 px-4">{user.email}</td>
                 <td className="py-2 px-4">
-                  <select
-                    value={user.role}
-                    onChange={(e) => handleRoleChange(user.id, e.target.value)}
-                    className="border px-2 py-1 rounded"
-                  >
-                    <option value="ADMIN">Admin</option>
-                    <option value="MENTOR">Mentor</option>
-                    <option value="MENTEE">Mentee</option>
-                  </select>
+                    <div className="flex items-center space-x-2">
+                      <select
+                        value={selectedRoles[user.id] || user.role}
+                        onChange={(e) => handleSelectChange(user.id, e.target.value)}
+                        className="border px-2 py-1 rounded"
+                      >
+                        <option value="ADMIN">Admin</option>
+                        <option value="MENTOR">Mentor</option>
+                        <option value="MENTEE">Mentee</option>
+                      </select>
+                      <button
+                        onClick={() => handleUpdateRole(user.id)}
+                        className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 text-sm"
+                      >
+                        Update Role
+                      </button>
+                    </div>
                 </td>
                 <td className="py-2 px-4">
                   <button

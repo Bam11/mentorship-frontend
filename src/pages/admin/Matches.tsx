@@ -26,7 +26,7 @@ const Matches = () => {
   useEffect(() => {
     const fetchMatches = async () => {
       try {
-        const res = await api.get('/admin/matches');
+        const res = await api.get('/auth/admin/matches');
         const fetchedMatches: Match[] = res.data.matches;
         setMatches(fetchedMatches);
       } catch (err: unknown) {
@@ -61,7 +61,7 @@ const Matches = () => {
 
         <div className="mt-6 text-center">
           <button
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/admin')}
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           >
             Back to Dashboard
