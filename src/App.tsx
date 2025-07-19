@@ -4,12 +4,14 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from './Components/ProtectedRoute';
+
+import AdminLayout from './pages/admin/AdminLayout';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminUsers from './pages/admin/Users';
 import AdminMatches from './pages/admin/Matches';
 import AdminSessions from './pages/admin/Sessions';
 import AssignMatch from './pages/admin/AssignMatch';
 
-// Admin Pages
-import AdminUsers from './pages/admin/Users'; // create later
 
 function App() {
   return (
@@ -20,40 +22,21 @@ function App() {
 
       {/* Protected Admin Route */}
       <Route
-        path="/admin/users"
+        path="/admin"
         element={
           <ProtectedRoute allowedRoles={['ADMIN']}>
-            <AdminUsers />
+            <AdminLayout />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route index element={<AdminDashboard />} /> {/* /admin */}
+        <Route path="users" element={<AdminUsers />} /> {/* /admin/users */}
+        <Route path="matches" element={<AdminMatches />} />
+        <Route path="sessions" element={<AdminSessions />} />
+        <Route path="assign" element={<AssignMatch />} />
+      </Route>
 
-      <Route
-        path="/admin/matches"
-        element={
-          <ProtectedRoute allowedRoles={['ADMIN']}>
-            <AdminMatches />
-          </ProtectedRoute>
-        }
-      />
-
-      <Route
-        path="/admin/sessions"
-        element={
-          <ProtectedRoute allowedRoles={['ADMIN']}>
-            <AdminSessions />
-          </ProtectedRoute>
-        }
-      />
-
-      <Route
-        path="/admin/assign"
-        element={
-          <ProtectedRoute allowedRoles={['ADMIN']}>
-            <AssignMatch />
-          </ProtectedRoute>
-        }
-      />
+        
 
       {/* 404 Page */}
       <Route path="*" element={<NotFound />} />

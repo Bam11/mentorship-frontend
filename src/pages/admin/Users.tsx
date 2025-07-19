@@ -14,7 +14,7 @@ const AdminUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await api.get('/admin/users');
+      const res = await api.get('/auth/admin/users');
       setUsers(res.data.users);
     } catch (err: unknown) {
       const error = err as {response?: {data?: {message?: string}}};
@@ -24,7 +24,7 @@ const AdminUsers = () => {
 
   const handleRoleChange = async (userId: string, newRole: string) => {
     try {
-      await api.put(`/admin/users/${userId}/role`, { role: newRole });
+      await api.put(`/auth/users/${userId}/role`, { role: newRole });
       fetchUsers(); // refresh the list
     } catch (err: unknown) {
       const error = err as {response?: {data?: {message?: string}}};
@@ -35,7 +35,7 @@ const AdminUsers = () => {
   const handleDelete = async (userId: string) => {
     if (!confirm('Are you sure you want to delete this user?')) return;
     try {
-      await api.delete(`/admin/users/${userId}`);
+      await api.delete(`/auth/admin/users/${userId}`);
       fetchUsers(); // refresh list
     } catch (err: unknown) {
       const error = err as {response?: {data?: {message?: string}}};
