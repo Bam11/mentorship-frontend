@@ -12,6 +12,13 @@ import AdminMatches from './pages/admin/Matches';
 import AdminSessions from './pages/admin/Sessions';
 import AssignMatch from './pages/admin/AssignMatch';
 
+import MenteeLayout from './pages/mentee/MenteeLayout';
+import MenteeDashboard from './pages/mentee/MenteeDashboard';
+import RequestSession from './pages/mentee/RequestSession';
+import MenteeSessions from './pages/mentee/Sessions';
+import Feedback from './pages/mentee/Feedback';
+import MenteeProfile from './pages/mentee/Profile';
+
 
 function App() {
   return (
@@ -35,6 +42,23 @@ function App() {
         <Route path="sessions" element={<AdminSessions />} />
         <Route path="assign-match" element={<AssignMatch />} />
       </Route>
+
+
+        {/* Protected Mentee Route */}
+        <Route
+          path="/mentee"
+          element={
+            <ProtectedRoute allowedRoles={['MENTEE']}>
+              <MenteeLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="dashboard" element={<MenteeDashboard />} />
+          <Route path="sessions" element={<MenteeSessions />} />
+          <Route path="feedback" element={<Feedback />} />
+          <Route path="profile" element={<MenteeProfile />} />
+          <Route path="request-session" element={<RequestSession />} />
+        </Route>
 
         
 

@@ -20,8 +20,9 @@ const Login = () => {
       localStorage.setItem('user', JSON.stringify(user));
 
       // Redirect based on role
-      if (user.role === 'ADMIN') window.location.href = '/admin/users';
-      else if (user.role === 'MENTOR') window.location.href = '/dashboard';
+      if (user.role === 'ADMIN') window.location.href = '/admin';
+      else if (user.role === 'MENTOR') window.location.href = '/mentor/dashboard';
+      else if (user.role === 'MENTEE') window.location.href = '/mentee/dashboard';
       else window.location.href = '/dashboard';
     } catch (err: unknown) {
       const error = err as {response?: {data?: {message?: string}}};
